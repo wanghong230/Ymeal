@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		485C4D8D17BA0DDD0091E545 /* TraktAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 485C4D8C17BA0DDD0091E545 /* TraktAPIClient.m */; };
+		485C4D9417BA10E10091E545 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485C4D9217BA10E10091E545 /* TestViewController.m */; };
+		485C4D9517BA10E10091E545 /* TestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 485C4D9317BA10E10091E545 /* TestViewController.xib */; };
 		48B49B5317B4819000A610E5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B49B5217B4819000A610E5 /* UIKit.framework */; };
 		48B49B5517B4819000A610E5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B49B5417B4819000A610E5 /* Foundation.framework */; };
 		48B49B5717B4819000A610E5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B49B5617B4819000A610E5 /* CoreGraphics.framework */; };
@@ -21,6 +24,7 @@
 		48B49B7317B4819100A610E5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B49B5417B4819000A610E5 /* Foundation.framework */; };
 		48B49B7B17B4819100A610E5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 48B49B7917B4819100A610E5 /* InfoPlist.strings */; };
 		48B49B7E17B4819100A610E5 /* YMealTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B49B7D17B4819100A610E5 /* YMealTests.m */; };
+		54B3D0461368422088636BA8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CAE5A93E2A42A0AF51C5A8 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +38,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		485C4D8B17BA0DDD0091E545 /* TraktAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TraktAPIClient.h; sourceTree = "<group>"; };
+		485C4D8C17BA0DDD0091E545 /* TraktAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TraktAPIClient.m; sourceTree = "<group>"; };
+		485C4D9117BA10E10091E545 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		485C4D9217BA10E10091E545 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		485C4D9317BA10E10091E545 /* TestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestViewController.xib; sourceTree = "<group>"; };
 		48B49B4F17B4819000A610E5 /* YMeal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YMeal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48B49B5217B4819000A610E5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		48B49B5417B4819000A610E5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -53,6 +62,8 @@
 		48B49B7A17B4819100A610E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		48B49B7C17B4819100A610E5 /* YMealTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YMealTests.h; sourceTree = "<group>"; };
 		48B49B7D17B4819100A610E5 /* YMealTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YMealTests.m; sourceTree = "<group>"; };
+		689A40F5F2564918B44FB7B1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		A8CAE5A93E2A42A0AF51C5A8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +74,7 @@
 				48B49B5317B4819000A610E5 /* UIKit.framework in Frameworks */,
 				48B49B5517B4819000A610E5 /* Foundation.framework in Frameworks */,
 				48B49B5717B4819000A610E5 /* CoreGraphics.framework in Frameworks */,
+				54B3D0461368422088636BA8 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +98,7 @@
 				48B49B7617B4819100A610E5 /* YMealTests */,
 				48B49B5117B4819000A610E5 /* Frameworks */,
 				48B49B5017B4819000A610E5 /* Products */,
+				689A40F5F2564918B44FB7B1 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,6 +118,7 @@
 				48B49B5417B4819000A610E5 /* Foundation.framework */,
 				48B49B5617B4819000A610E5 /* CoreGraphics.framework */,
 				48B49B7017B4819100A610E5 /* SenTestingKit.framework */,
+				A8CAE5A93E2A42A0AF51C5A8 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -113,7 +127,12 @@
 			isa = PBXGroup;
 			children = (
 				48B49B6117B4819000A610E5 /* AppDelegate.h */,
+				485C4D8B17BA0DDD0091E545 /* TraktAPIClient.h */,
+				485C4D8C17BA0DDD0091E545 /* TraktAPIClient.m */,
 				48B49B6217B4819000A610E5 /* AppDelegate.m */,
+				485C4D9117BA10E10091E545 /* TestViewController.h */,
+				485C4D9217BA10E10091E545 /* TestViewController.m */,
+				485C4D9317BA10E10091E545 /* TestViewController.xib */,
 				48B49B5917B4819000A610E5 /* Supporting Files */,
 			);
 			path = YMeal;
@@ -159,9 +178,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 48B49B8117B4819100A610E5 /* Build configuration list for PBXNativeTarget "YMeal" */;
 			buildPhases = (
+				164548C3692C4ADD8B0FAE58 /* Check Pods Manifest.lock */,
 				48B49B4B17B4819000A610E5 /* Sources */,
 				48B49B4C17B4819000A610E5 /* Frameworks */,
 				48B49B4D17B4819000A610E5 /* Resources */,
+				79E6C060517A4C76BEA1258D /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -226,6 +247,7 @@
 				48B49B6517B4819000A610E5 /* Default.png in Resources */,
 				48B49B6717B4819000A610E5 /* Default@2x.png in Resources */,
 				48B49B6917B4819000A610E5 /* Default-568h@2x.png in Resources */,
+				485C4D9517BA10E10091E545 /* TestViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +262,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		164548C3692C4ADD8B0FAE58 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		48B49B6D17B4819100A610E5 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -253,6 +290,21 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
+		79E6C060517A4C76BEA1258D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -262,6 +314,8 @@
 			files = (
 				48B49B5F17B4819000A610E5 /* main.m in Sources */,
 				48B49B6317B4819000A610E5 /* AppDelegate.m in Sources */,
+				485C4D8D17BA0DDD0091E545 /* TraktAPIClient.m in Sources */,
+				485C4D9417BA10E10091E545 /* TestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +417,7 @@
 		};
 		48B49B8217B4819100A610E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 689A40F5F2564918B44FB7B1 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YMeal/YMeal-Prefix.pch";
@@ -374,6 +429,7 @@
 		};
 		48B49B8317B4819100A610E5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 689A40F5F2564918B44FB7B1 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YMeal/YMeal-Prefix.pch";
@@ -436,6 +492,7 @@
 				48B49B8317B4819100A610E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		48B49B8417B4819100A610E5 /* Build configuration list for PBXNativeTarget "YMealTests" */ = {
 			isa = XCConfigurationList;
@@ -444,6 +501,7 @@
 				48B49B8617B4819100A610E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
