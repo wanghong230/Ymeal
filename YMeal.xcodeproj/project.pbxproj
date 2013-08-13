@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1353FAEF17B9F5BB00BBBF7A /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1353FAEE17B9F5BB00BBBF7A /* MenuViewController.m */; };
+		1353FAF217B9F73200BBBF7A /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1353FAF117B9F73200BBBF7A /* CustomCell.m */; };
+		1353FAF417B9F75C00BBBF7A /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1353FAF317B9F75C00BBBF7A /* CustomCell.xib */; };
 		48B49B5317B4819000A610E5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B49B5217B4819000A610E5 /* UIKit.framework */; };
 		48B49B5517B4819000A610E5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B49B5417B4819000A610E5 /* Foundation.framework */; };
 		48B49B5717B4819000A610E5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B49B5617B4819000A610E5 /* CoreGraphics.framework */; };
@@ -34,6 +37,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1353FAED17B9F5BB00BBBF7A /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		1353FAEE17B9F5BB00BBBF7A /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		1353FAF017B9F73200BBBF7A /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
+		1353FAF117B9F73200BBBF7A /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
+		1353FAF317B9F75C00BBBF7A /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 		48B49B4F17B4819000A610E5 /* YMeal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YMeal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48B49B5217B4819000A610E5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		48B49B5417B4819000A610E5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -112,8 +120,13 @@
 		48B49B5817B4819000A610E5 /* YMeal */ = {
 			isa = PBXGroup;
 			children = (
+				1353FAED17B9F5BB00BBBF7A /* MenuViewController.h */,
+				1353FAEE17B9F5BB00BBBF7A /* MenuViewController.m */,
 				48B49B6117B4819000A610E5 /* AppDelegate.h */,
 				48B49B6217B4819000A610E5 /* AppDelegate.m */,
+				1353FAF017B9F73200BBBF7A /* CustomCell.h */,
+				1353FAF117B9F73200BBBF7A /* CustomCell.m */,
+				1353FAF317B9F75C00BBBF7A /* CustomCell.xib */,
 				48B49B5917B4819000A610E5 /* Supporting Files */,
 			);
 			path = YMeal;
@@ -226,6 +239,7 @@
 				48B49B6517B4819000A610E5 /* Default.png in Resources */,
 				48B49B6717B4819000A610E5 /* Default@2x.png in Resources */,
 				48B49B6917B4819000A610E5 /* Default-568h@2x.png in Resources */,
+				1353FAF417B9F75C00BBBF7A /* CustomCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +276,8 @@
 			files = (
 				48B49B5F17B4819000A610E5 /* main.m in Sources */,
 				48B49B6317B4819000A610E5 /* AppDelegate.m in Sources */,
+				1353FAEF17B9F5BB00BBBF7A /* MenuViewController.m in Sources */,
+				1353FAF217B9F73200BBBF7A /* CustomCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +452,7 @@
 				48B49B8317B4819100A610E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		48B49B8417B4819100A610E5 /* Build configuration list for PBXNativeTarget "YMealTests" */ = {
 			isa = XCConfigurationList;
@@ -444,6 +461,7 @@
 				48B49B8617B4819100A610E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
