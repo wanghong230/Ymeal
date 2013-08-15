@@ -10,6 +10,9 @@
 		485C4D8D17BA0DDD0091E545 /* TraktAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 485C4D8C17BA0DDD0091E545 /* TraktAPIClient.m */; };
 		485C4D9417BA10E10091E545 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485C4D9217BA10E10091E545 /* TestViewController.m */; };
 		485C4D9517BA10E10091E545 /* TestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 485C4D9317BA10E10091E545 /* TestViewController.xib */; };
+		1353FAEF17B9F5BB00BBBF7A /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1353FAEE17B9F5BB00BBBF7A /* MenuViewController.m */; };
+		1353FAF217B9F73200BBBF7A /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1353FAF117B9F73200BBBF7A /* CustomCell.m */; };
+		1353FAF417B9F75C00BBBF7A /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1353FAF317B9F75C00BBBF7A /* CustomCell.xib */; };
 		48B49B5317B4819000A610E5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B49B5217B4819000A610E5 /* UIKit.framework */; };
 		48B49B5517B4819000A610E5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B49B5417B4819000A610E5 /* Foundation.framework */; };
 		48B49B5717B4819000A610E5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B49B5617B4819000A610E5 /* CoreGraphics.framework */; };
@@ -43,6 +46,11 @@
 		485C4D9117BA10E10091E545 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		485C4D9217BA10E10091E545 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		485C4D9317BA10E10091E545 /* TestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestViewController.xib; sourceTree = "<group>"; };
+		1353FAED17B9F5BB00BBBF7A /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		1353FAEE17B9F5BB00BBBF7A /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		1353FAF017B9F73200BBBF7A /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
+		1353FAF117B9F73200BBBF7A /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
+		1353FAF317B9F75C00BBBF7A /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 		48B49B4F17B4819000A610E5 /* YMeal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YMeal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48B49B5217B4819000A610E5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		48B49B5417B4819000A610E5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -126,6 +134,8 @@
 		48B49B5817B4819000A610E5 /* YMeal */ = {
 			isa = PBXGroup;
 			children = (
+				1353FAED17B9F5BB00BBBF7A /* MenuViewController.h */,
+				1353FAEE17B9F5BB00BBBF7A /* MenuViewController.m */,
 				48B49B6117B4819000A610E5 /* AppDelegate.h */,
 				485C4D8B17BA0DDD0091E545 /* TraktAPIClient.h */,
 				485C4D8C17BA0DDD0091E545 /* TraktAPIClient.m */,
@@ -133,6 +143,9 @@
 				485C4D9117BA10E10091E545 /* TestViewController.h */,
 				485C4D9217BA10E10091E545 /* TestViewController.m */,
 				485C4D9317BA10E10091E545 /* TestViewController.xib */,
+				1353FAF017B9F73200BBBF7A /* CustomCell.h */,
+				1353FAF117B9F73200BBBF7A /* CustomCell.m */,
+				1353FAF317B9F75C00BBBF7A /* CustomCell.xib */,
 				48B49B5917B4819000A610E5 /* Supporting Files */,
 			);
 			path = YMeal;
@@ -248,6 +261,7 @@
 				48B49B6717B4819000A610E5 /* Default@2x.png in Resources */,
 				48B49B6917B4819000A610E5 /* Default-568h@2x.png in Resources */,
 				485C4D9517BA10E10091E545 /* TestViewController.xib in Resources */,
+				1353FAF417B9F75C00BBBF7A /* CustomCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +330,8 @@
 				48B49B6317B4819000A610E5 /* AppDelegate.m in Sources */,
 				485C4D8D17BA0DDD0091E545 /* TraktAPIClient.m in Sources */,
 				485C4D9417BA10E10091E545 /* TestViewController.m in Sources */,
+				1353FAEF17B9F5BB00BBBF7A /* MenuViewController.m in Sources */,
+				1353FAF217B9F73200BBBF7A /* CustomCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
