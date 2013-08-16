@@ -140,6 +140,16 @@
         NSString *dislikeText = [NSString stringWithFormat:@"Dislike(%d)", [meal numDislikes]];
         [cell.like setTitle:likeText forState:UIControlStateNormal];
         [cell.dislike setTitle:dislikeText forState:UIControlStateNormal];
+        
+        // meal.voted = "none", "dislike", "like"
+        
+        if ([meal.voted isEqualToString: @"like"]) {
+            [self onTouchLikeFake: cell.like];
+        }
+        else if ([meal.voted isEqualToString: @"dislike"]) {
+            [self onTouchDislikeFake: cell.dislike];
+        }
+        
     }
     else {
         cell.category.text = @"WUT";
@@ -322,6 +332,12 @@
     [dislikeButton setEnabled:FALSE];
     // send post request to backend
     [self postLikeMeal:sender.tag];
+    
+    //increment UI by 1;
+    int sectionInt = (sender.tag % 10000) / 1000;
+    int rowInt = sender.tag % 1000;
+    NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:sectionInt];
+    MealObject *meal = [[self.cafeToMealsMap objectForKey:key] objectAtIndex: rowInt];
     [self performSelector:@selector(highlightButton:) withObject:sender afterDelay:0.0];
 }
 
@@ -331,7 +347,15 @@
     CustomCell *cell = (CustomCell *)[[sender superview] superview];
     UIButton *likeButton = cell.like;
     [likeButton setEnabled:FALSE];
+    
+    // send post request to backend
     [self postDislikeMeal:sender.tag];
+    
+    //increment UI by 1;
+    int sectionInt = (sender.tag % 10000) / 1000;
+    int rowInt = sender.tag % 1000;
+    NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:sectionInt];
+    MealObject *meal = [[self.cafeToMealsMap objectForKey:key] objectAtIndex: rowInt];
     [self performSelector:@selector(highlightButton:) withObject:sender afterDelay:0.0];
 }
 
@@ -423,6 +447,7 @@
     meal.numLikes = meal.numLikes + 1;
     meal.voted = @"like";
     //[self.tableView reloadData];
+    
     NSLog(meal.name);
     NSString *mealid = [meal.mealID stringValue];
     NSURLRequest *request = [client requestWithMethod:@"POST" path:@"" parameters:@{@"deviceid": self.deviceID, @"mealid": mealid}];
@@ -448,7 +473,7 @@
     //TODO move to success
     meal.numDislikes = meal.numDislikes + 1;
     meal.voted = @"dislike";
-    [self.tableView reloadData];
+    //[self.tableView reloadData];
     
     NSLog(meal.name);
     NSString *mealid = [meal.mealID stringValue];
