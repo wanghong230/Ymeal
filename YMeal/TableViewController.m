@@ -334,6 +334,7 @@
     [self postLikeMeal:sender.tag];
     
     //increment UI by 1;
+    NSLog(@"incrementing like");
     int sectionInt = (sender.tag % 10000) / 1000;
     int rowInt = sender.tag % 1000;
     NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:sectionInt];
@@ -357,6 +358,7 @@
     [self postDislikeMeal:sender.tag];
     
     //increment UI by 1;
+    NSLog(@"increment dislike");
     int sectionInt = (sender.tag % 10000) / 1000;
     int rowInt = sender.tag % 1000;
     NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:sectionInt];
@@ -407,7 +409,7 @@
                                                                                                NSDictionary *dict = (NSDictionary *)obj;
                                                                                                MealObject *meal = [[MealObject alloc] init];
                                                                                                
-                                                                                               meal.mealID = (NSNumber *)[dict objectForKey:@"id"];
+                                                                                               meal.mealID = (NSNumber *)[dict objectForKey:@"meal_id"];
                                                                                                meal.description = (NSString *)[dict objectForKey:@"description"];
                                                                                                meal.dateStr = (NSString *)[dict objectForKey:@"date"];
                                                                                                meal.cafeteria = (NSString *) [dict objectForKey:@"cafeteria"];
@@ -452,11 +454,11 @@
     
     NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:sectionInt];
     MealObject *meal = [[self.cafeToMealsMap objectForKey:key] objectAtIndex: rowInt];
-    NSString *listURLpostfix = [NSString stringWithFormat:@"%d//like", meal.mealID];
+    NSString *listURLpostfix = [NSString stringWithFormat:@"%d/like", meal.mealID];
     NSString *likeURL = [self.baseurl stringByAppendingString:listURLpostfix];
     
     NSLog(@"likeURL: %@", likeURL);
-    NSURL *url = [NSURL URLWithString:self.baseurl];
+    NSURL *url = [NSURL URLWithString:likeURL];
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
     //NSURLRequest *request = [NSURLRequest requestWithURL:url];    
     
@@ -487,14 +489,16 @@
     //NSURLRequest *request = [NSURLRequest requestWithURL:url];
     NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:sectionInt];
     MealObject *meal = [[self.cafeToMealsMap objectForKey:key] objectAtIndex: rowInt];
+    
     //TODO move to success
     meal.numDislikes = meal.numDislikes + 1;
     meal.voted = @"dislike";
-    //[self.tableView reloadData];
     
     NSLog(meal.name);
     NSString *mealid = [meal.mealID stringValue];
+    NSLog(@"meal.mealID: %@", mealid);
     NSURLRequest *request = [client requestWithMethod:@"POST" path:@"" parameters:@{@"deviceid": self.deviceID, @"mealid": mealid}];
+    NSLog(@"created request");
     AFJSONRequestOperation *operation =[AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
                                                                                            NSLog(@"successful like post");
