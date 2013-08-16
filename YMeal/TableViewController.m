@@ -59,6 +59,18 @@
     self.navigationItem.rightBarButtonItem = anotherButton;
     
     [self refreshMeals];
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc]
+                                        init];
+//    refreshControl.tintColor = [UIColormagentaColor];
+    [refreshControl addTarget:self action:@selector(changeSorting) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refreshControl;
+}
+
+- (void)changeSorting
+{
+     [self refreshMeals];
+     [self.refreshControl endRefreshing];
 }
 
 - (void)didReceiveMemoryWarning
