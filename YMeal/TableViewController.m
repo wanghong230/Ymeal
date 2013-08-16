@@ -465,6 +465,20 @@
                                                                                                
                                                                                            }
                                                                                            
+                                                                                           //sort each array by numlikes, then alpha
+                                                                                           NSArray *keys = [self.cafeToMealsMap allKeys];
+                                                                                           
+                                                                                           for (NSString *key in keys) {
+                                                                                               NSMutableArray *cafeArray = [self.cafeToMealsMap objectForKey:key];
+                                                                                               NSSortDescriptor *byLike = [[NSSortDescriptor alloc] initWithKey:@"numLikes" ascending:NO];
+                                                                                               NSSortDescriptor *byName = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+                                                                                               
+                                                                                               
+                                                                                               [cafeArray sortUsingDescriptors:[NSArray arrayWithObjects:byLike, byName, nil]];
+                                                                                              
+                                                                                          
+                                                                                           }
+                                                                                           //
                                                                                            [self.tableView reloadData];
                                                                                        }
                                         
