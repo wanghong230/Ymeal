@@ -124,15 +124,32 @@
     
     UIColor * color1 = [UIColor colorWithRed:239/255.0f green:235/255.0f blue:214/255.0f alpha:1.0f];
     UIColor * color2 = [UIColor colorWithRed:231/255.0f green:223/255.0f blue:156/255.0f alpha:1.0f];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     if (indexPath.row % 2)
     {
         [cell.contentView setBackgroundColor:color1];
+        [cell.accessoryView setBackgroundColor:color1];
+    } else {
+        [cell.contentView setBackgroundColor:color2];
+        [cell.accessoryView setBackgroundColor:color2];
     }
-    else [cell.contentView setBackgroundColor:color2];
-    
-    
     return cell;
+}
+
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+    UIColor * color1 = [UIColor colorWithRed:239/255.0f green:235/255.0f blue:214/255.0f alpha:1.0f];
+    UIColor * color2 = [UIColor colorWithRed:231/255.0f green:223/255.0f blue:156/255.0f alpha:1.0f];
+    
+    if (indexPath.row % 2)
+    {
+        cell.backgroundColor = color1;
+    } else {
+        cell.backgroundColor = color2;
+    }
 }
 
 /*
