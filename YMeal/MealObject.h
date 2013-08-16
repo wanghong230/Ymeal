@@ -15,6 +15,10 @@
 @property (nonatomic, strong) NSString *cafeteria;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *description;
+// "none", "like", "dislike"
+@property (nonatomic, strong) NSString *voted;
+@property int numLikes;
+@property int numDislikes;
 //@property (nonatomic, strong) NSArray *attributes;
 
 @end

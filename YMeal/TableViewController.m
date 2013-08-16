@@ -348,6 +348,9 @@
                                                                                                meal.dateStr = (NSString *)[dict objectForKey:@"date"];
                                                                                                meal.cafeteria = (NSString *) [dict objectForKey:@"cafeteria"];
                                                                                                meal.name = (NSString *) [dict objectForKey:@"name"];
+                                                                                               meal.voted = @"none";
+                                                                                               meal.numLikes = 500;
+                                                                                               meal.numDislikes = 500;
                                                                                                [self.mealsArray addObject:meal];
                                                                                            }
                                                                                            for (MealObject *meal in self.mealsArray) {
@@ -378,7 +381,8 @@
 
 -(void) postLikeMeal:(int)encodedTag {
     NSLog(@"in postLikeMeal");
-    int sectionInt = encodedTag / 1000;
+    
+    int sectionInt = (encodedTag % 10000) / 1000;
     int rowInt = encodedTag % 1000;
     NSURL *url = [NSURL URLWithString:self.baseurl];
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -386,6 +390,7 @@
     //TODO: find meal
     NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:sectionInt];
     MealObject *meal = [[self.cafeToMealsMap objectForKey:key] objectAtIndex: rowInt];
+    NSLog(meal.name);
     NSString *mealid = [meal.mealID stringValue];
     NSURLRequest *request = [client requestWithMethod:@"POST" path:@"" parameters:@{@"deviceid": self.deviceID, @"mealid": mealid}];
     AFJSONRequestOperation *operation =[AFJSONRequestOperation JSONRequestOperationWithRequest:request
@@ -400,7 +405,7 @@
 
 -(void) postDislikeMeal:(int)encodedTag {
     NSLog(@"in postDISLIKEMeal");
-    int sectionInt = encodedTag / 1000;
+    int sectionInt = (encodedTag % 10000) / 1000;
     int rowInt = encodedTag % 1000;
     NSURL *url = [NSURL URLWithString:self.baseurl];
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -408,6 +413,7 @@
     //TODO: find meal
     NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:sectionInt];
     MealObject *meal = [[self.cafeToMealsMap objectForKey:key] objectAtIndex: rowInt];
+    NSLog(meal.name);
     NSString *mealid = [meal.mealID stringValue];
     NSURLRequest *request = [client requestWithMethod:@"POST" path:@"" parameters:@{@"deviceid": self.deviceID, @"mealid": mealid}];
     AFJSONRequestOperation *operation =[AFJSONRequestOperation JSONRequestOperationWithRequest:request
