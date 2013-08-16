@@ -323,6 +323,22 @@
     [self performSelector:@selector(highlightButton:) withObject:sender afterDelay:0.0];
 }
 
+- (IBAction)onTouchLikeFake:(UIButton *)sender {
+    [sender setEnabled:FALSE];
+    CustomCell *cell = (CustomCell *)[[sender superview] superview];
+    UIButton *dislikeButton = cell.dislike;
+    [dislikeButton setEnabled:FALSE];
+    [self performSelector:@selector(highlightButton:) withObject:sender afterDelay:0.0];
+}
+
+- (IBAction)onTouchDislikeFake:(UIButton *)sender {
+    [sender setEnabled:FALSE];
+    CustomCell *cell = (CustomCell *)[[sender superview] superview];
+    UIButton *likeButton = cell.like;
+    [likeButton setEnabled:FALSE];
+    [self performSelector:@selector(highlightButton:) withObject:sender afterDelay:0.0];
+}
+
 #pragma mark - communication to backend
 - (void) refreshMeals {
     NSLog(@"in refreshMeals");
