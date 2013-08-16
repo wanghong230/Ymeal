@@ -338,6 +338,11 @@
     int rowInt = sender.tag % 1000;
     NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:sectionInt];
     MealObject *meal = [[self.cafeToMealsMap objectForKey:key] objectAtIndex: rowInt];
+    
+    NSString *likeText = [NSString stringWithFormat:@"Like(%d)", [meal numLikes]];
+    [sender setTitle:likeText forState:UIControlStateNormal];
+    
+    
     [self performSelector:@selector(highlightButton:) withObject:sender afterDelay:0.0];
 }
 
@@ -356,6 +361,10 @@
     int rowInt = sender.tag % 1000;
     NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:sectionInt];
     MealObject *meal = [[self.cafeToMealsMap objectForKey:key] objectAtIndex: rowInt];
+    
+    NSString *dislikeText = [NSString stringWithFormat:@"Dislike(%d)", [meal numDislikes]];
+    [sender setTitle:dislikeText forState:UIControlStateNormal];
+    
     [self performSelector:@selector(highlightButton:) withObject:sender afterDelay:0.0];
 }
 

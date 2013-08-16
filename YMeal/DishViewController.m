@@ -45,6 +45,8 @@
     }
      */
     self.description.text = self.meal.description;
+    self.numOfDislike.text = [NSString stringWithFormat:@"%d", self.meal.numDislikes];
+    self.numOfLike.text = [NSString stringWithFormat:@"%d", self.meal.numLikes];
 }
 
 - (void)didReceiveMemoryWarning
