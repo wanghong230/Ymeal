@@ -10,6 +10,7 @@
 #import "CustomCell.h"
 #import "DishViewController.h"
 #import <AFJSONRequestOperation.h>
+#import <AFHTTPClient.h>
 #import "MealObject.h"
 
 @interface TableViewController ()
@@ -17,7 +18,7 @@
 @property(nonatomic, strong) NSMutableDictionary *cafeToMealsMap;
 @property(nonatomic, strong) NSMutableArray *mealsArray;
 @property(nonatomic, strong) NSString *baseurl;
-
+@property(nonatomic, strong) NSString *deviceID;
 @end
 
 @implementation TableViewController
@@ -30,6 +31,8 @@
         self.mealsArray = [[NSMutableArray alloc] init];
         self.cafeToMealsMap = [[NSMutableDictionary alloc] init];
         self.baseurl = @"http://ec2-50-19-203-2.compute-1.amazonaws.com/api/meal";
+        self.deviceID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+
     }
     return self;
 }
@@ -220,8 +223,9 @@
 - (void) refreshMeals {
     NSLog(@"in refreshMeals");
     NSURL *url = [NSURL URLWithString:self.baseurl];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    //self.mealsArray = [[NSMutableArray alloc] init];
+    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
+    //NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSURLRequest *request = [client requestWithMethod:@"GET" path:@"" parameters:@{@"deviceid": self.deviceID}];
     AFJSONRequestOperation *operation =[AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
                                                                                            NSData *jsonData = (NSData *)JSON;
@@ -270,4 +274,47 @@
     
 }
 
+-(void) postLikeMeal:(int)encodedTag {
+    NSLog(@"in postLikeMeal");
+    int sectionInt = encodedTag / 1000;
+    int rowInt = encodedTag % 1000;
+    NSURL *url = [NSURL URLWithString:self.baseurl];
+    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
+    //NSURLRequest *request = [NSURLRequest requestWithURL:url];    
+    //TODO: find meal
+    NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:sectionInt];
+    MealObject *meal = [[self.cafeToMealsMap objectForKey:key] objectAtIndex: rowInt];
+    NSString *mealid = [meal.mealID stringValue];
+    NSURLRequest *request = [client requestWithMethod:@"POST" path:@"" parameters:@{@"deviceid": self.deviceID, @"mealid": mealid}];
+    AFJSONRequestOperation *operation =[AFJSONRequestOperation JSONRequestOperationWithRequest:request
+        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+            NSLog(@"successful like post");
+        }
+        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+            NSLog(@"error response");
+        }];
+    [operation start];
+}
+
+-(void) postDislikeMeal:(int)encodedTag {
+    NSLog(@"in postDISLIKEMeal");
+    int sectionInt = encodedTag / 1000;
+    int rowInt = encodedTag % 1000;
+    NSURL *url = [NSURL URLWithString:self.baseurl];
+    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
+    //NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    //TODO: find meal
+    NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:sectionInt];
+    MealObject *meal = [[self.cafeToMealsMap objectForKey:key] objectAtIndex: rowInt];
+    NSString *mealid = [meal.mealID stringValue];
+    NSURLRequest *request = [client requestWithMethod:@"POST" path:@"" parameters:@{@"deviceid": self.deviceID, @"mealid": mealid}];
+    AFJSONRequestOperation *operation =[AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                                                           NSLog(@"successful like post");
+                                                                                       }
+                                                                                       failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                                                           NSLog(@"error response");
+                                                                                       }];
+    [operation start];
+}
 @end
