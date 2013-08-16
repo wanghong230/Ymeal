@@ -124,9 +124,10 @@
         MealObject *meal = [cafeMeals objectAtIndex:indexPath.row];
         cell.category.text = [[meal name] uppercaseString];
         cell.menuname.text = [meal name];
-        [meal 
-        NSString *likeText = [NSString INI ]
-        [cell.like setTitle:@"hong" forState:UIControlStateNormal];
+        NSString *likeText = [NSString stringWithFormat:@"Like(%d)", [meal numLikes]];
+        NSString *dislikeText = [NSString stringWithFormat:@"Dislike(%d)", [meal numDislikes]];
+        [cell.like setTitle:likeText forState:UIControlStateNormal];
+        [cell.dislike setTitle:dislikeText forState:UIControlStateNormal];
     }
     else {
         cell.category.text = @"WUT";
