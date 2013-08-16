@@ -14,7 +14,7 @@
     int sectionSelectedPreviously;
     
 }
-@property (nonatomic, weak) IBOutlet UILabel *description;
+@property (nonatomic, weak) IBOutlet UITextView *description;
 @property (nonatomic, weak) IBOutlet UILabel *numOfLike;
 @property (nonatomic, weak) IBOutlet UILabel *numOfDislike;
 @property (nonatomic) int rowSelectedPreviously;

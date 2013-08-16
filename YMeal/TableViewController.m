@@ -156,7 +156,7 @@
         cell.menuname.text = @"WUT";
     }
     
-    UIColor * color1 = [UIColor colorWithRed:239/255.0f green:235/255.0f blue:214/255.0f alpha:1.0f];
+    UIColor * color1 = [UIColor colorWithRed:254/255.0f green:220/255.0f blue:58/255.0f alpha:1.0f];
     UIColor * color2 = [UIColor colorWithRed:231/255.0f green:223/255.0f blue:156/255.0f alpha:1.0f];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
@@ -175,7 +175,7 @@
 {
     
     
-    UIColor * color1 = [UIColor colorWithRed:239/255.0f green:235/255.0f blue:214/255.0f alpha:1.0f];
+    UIColor * color1 = [UIColor colorWithRed:254/255.0f green:220/255.0f blue:58/255.0f alpha:1.0f];
     UIColor * color2 = [UIColor colorWithRed:231/255.0f green:223/255.0f blue:156/255.0f alpha:1.0f];
     
     if (indexPath.row % 2)
@@ -264,8 +264,8 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UILabel *lbl = [[UILabel alloc] init];
     lbl.textAlignment = UITextAlignmentCenter;
-    lbl.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];
-//    lbl.text = @"My Centered Header";
+    lbl.font = [UIFont fontWithName:@"Helvetica-Bold" size:28];
+    [lbl.superview setFrame:CGRectMake(50, 50, lbl.frame.size.width, lbl.frame.size.height)];
     
     UIColor * color1 = [UIColor colorWithRed:231/255.0f green:195/255.0f blue:156/255.0f alpha:1.0f];
     lbl.textColor = [UIColor whiteColor];
