@@ -124,6 +124,9 @@
         MealObject *meal = [cafeMeals objectAtIndex:indexPath.row];
         cell.category.text = [[meal name] uppercaseString];
         cell.menuname.text = [meal name];
+        [meal 
+        NSString *likeText = [NSString INI ]
+        [cell.like setTitle:@"hong" forState:UIControlStateNormal];
     }
     else {
         cell.category.text = @"WUT";
