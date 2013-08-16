@@ -10,11 +10,11 @@
 
 @interface MealObject : NSObject
 
-@property (nonatomic, strong, readonly) NSString *mealID;
-@property (nonatomic, strong, readonly) NSString *dateStr;
-@property (nonatomic, strong, readonly) NSString *cafeteria;
-@property (nonatomic, strong, readonly) NSString *name;
-@property (nonatomic, strong, readonly) NSString *description;
-@property (nonatomic, strong) NSArray *attributes;
+@property (nonatomic, strong) NSNumber *mealID;
+@property (nonatomic, strong) NSString *dateStr;
+@property (nonatomic, strong) NSString *cafeteria;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *description;
+//@property (nonatomic, strong) NSArray *attributes;
 
 @end

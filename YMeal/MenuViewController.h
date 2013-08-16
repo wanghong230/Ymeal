@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface MenuViewController : UITableViewController
-
+-(void)refreshMeals;
 @end

@@ -9,12 +9,13 @@
 #import "MenuViewController.h"
 #import "CustomCell.h"
 #import <AFJSONRequestOperation.h>
-#import "ClientManager.h"
+#import "MealObject.h"
 
 @interface MenuViewController ()
 
-@property(strong) NSDictionary *weather;
-@property(strong) ClientManager *clientManager;
+@property(nonatomic, strong) NSMutableDictionary *cafeToMealsMap;
+@property(nonatomic, strong) NSMutableArray *mealsArray;
+@property(nonatomic, strong) NSString *baseurl;
 @end
 
 @implementation MenuViewController
@@ -24,6 +25,12 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        self.mealsArray = [[NSMutableArray alloc] init];
+        self.cafeToMealsMap = [[NSMutableDictionary alloc] init];
+        self.baseurl = @"http://ec2-50-19-203-2.compute-1.amazonaws.com/api/meal";
+        //NSLog(@"count: %d", [self.mealsArray count]);
+
+        [self refreshMeals];
     }
     return self;
 }
@@ -41,9 +48,10 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    // initialize client
-    self.clientManager = [[ClientManager alloc] init];
-    NSDictionary* mealsMap = self.clientManager.getMeals;
+    // fetching data
+    
+    [self refreshMeals];
+
     
 }
 
@@ -60,7 +68,7 @@
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
      // Need to know how many different sections today for Qian Long
-    return 2;
+    return [[self.cafeToMealsMap allKeys] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -68,7 +76,7 @@
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
     // Need to know how many different meals today for Qian Long
-    return 30;
+    return [self.mealsArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -79,8 +87,9 @@
     if(cell == nil) {
         cell = [[CustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    
+
     // Configure the cell...
+    /*
     if(indexPath.row == 0) {
         cell.category.text = @"Pizza Special";
         cell.menuname.text = @"Roasted fig and prosciutto";
@@ -94,24 +103,40 @@
         cell.category.text = @"stir-fry";
         cell.menuname.text = @"lemon chicken ";
     }
+    */
+    //MealObject *meal = [self.mealsArray objectAtIndex:indexPath.row];
     
+    if (indexPath.row < [self.mealsArray count]) {
+        MealObject *meal = [self.mealsArray objectAtIndex:indexPath.row];
+        cell.category.text = [meal name];
+        cell.menuname.text = [meal name];
+    }
+    else {
+        cell.category.text = @"WUT";
+        cell.menuname.text = @"WUT";
+    }
     return cell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if(section == 0)
-        return @"URL's Café";
-    else if(section == 1)
-        return @"BUILDING G";
+    if (section < [[self.cafeToMealsMap allKeys] count]) {
+        return (NSString *)[[self.cafeToMealsMap allKeys] objectAtIndex:section];
+    }
+    else {
+        return @"WUT";
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    if(section == 0)
-        return @"BUILDING G";
-    else if(section == 1)
-        return nil;
+    
+    if (section < [[self.cafeToMealsMap allKeys] count]) {
+        return (NSString *)[[self.cafeToMealsMap allKeys] objectAtIndex:section];
+    }
+    else {
+        return @"WUT";
+    }
 }
 
 /*
@@ -179,5 +204,57 @@
 }
 
 
+#pragma mark - communication to backend
+- (void) refreshMeals {
+    NSLog(@"in refreshMeals");
+    NSURL *url = [NSURL URLWithString:self.baseurl];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    //self.mealsArray = [[NSMutableArray alloc] init];
+    AFJSONRequestOperation *operation =[AFJSONRequestOperation JSONRequestOperationWithRequest:request
+        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+            NSData *jsonData = (NSData *)JSON;  
+            NSArray *jsonArray = (NSArray *)jsonData;
+            
+            // create new objects and throw away old
+            self.mealsArray = [[NSMutableArray alloc] init];
+            self.cafeToMealsMap = [[NSMutableDictionary alloc] init];
+            
+            // populating self.mealsArray
+            for (id obj in jsonArray) {
+                NSDictionary *dict = (NSDictionary *)obj;
+                MealObject *meal = [[MealObject alloc] init];
+                                                                                          
+                meal.mealID = (NSNumber *)[dict objectForKey:@"id"];
+                meal.description = (NSString *)[dict objectForKey:@"description"];
+                meal.dateStr = (NSString *)[dict objectForKey:@"date"];
+                meal.cafeteria = (NSString *) [dict objectForKey:@"cafeteria"];
+                meal.name = (NSString *) [dict objectForKey:@"name"];
+                [self.mealsArray addObject:meal];
+            }
+            for (MealObject *meal in self.mealsArray) {
+                NSLog([meal name]);
+            }
+            
+            // populating self.cafeToMealsMap
+            for (MealObject *meal in self.mealsArray) {
+                if (![self.cafeToMealsMap objectForKey: meal.cafeteria]) {
+                    NSLog(@"%@ not in dict", meal.cafeteria);
+                    NSMutableArray *cafeMealsArray = [[NSMutableArray alloc] init];
+                    [self.cafeToMealsMap setObject:cafeMealsArray forKey:meal.cafeteria];
+                }
+                
+                [[self.cafeToMealsMap objectForKey:meal.cafeteria] addObject:meal];
+                
+            }
+            
+            [self.tableView reloadData];
+        }
+                                        
+        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+            NSLog(@"error response");
+        }];
+    
+    [operation start];
 
+}
 @end

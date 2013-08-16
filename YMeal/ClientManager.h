@@ -13,7 +13,7 @@
 @interface ClientManager : NSObject
 
 - (id)init;
-- (NSDictionary *) getMeals;
+- (void) getMeals;
 
 //+(void *) postLikeMeal:(NSInteger *) mealId;
 //+(void *) postDislikeMeal:(NSInteger *) mealId;
