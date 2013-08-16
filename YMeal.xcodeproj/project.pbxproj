@@ -7,12 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1353FAEF17B9F5BB00BBBF7A /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1353FAEE17B9F5BB00BBBF7A /* MenuViewController.m */; };
 		1353FAF217B9F73200BBBF7A /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1353FAF117B9F73200BBBF7A /* CustomCell.m */; };
 		1353FAF417B9F75C00BBBF7A /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1353FAF317B9F75C00BBBF7A /* CustomCell.xib */; };
-		485C4D8D17BA0DDD0091E545 /* TraktAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 485C4D8C17BA0DDD0091E545 /* TraktAPIClient.m */; };
-		485C4D9417BA10E10091E545 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485C4D9217BA10E10091E545 /* TestViewController.m */; };
-		485C4D9517BA10E10091E545 /* TestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 485C4D9317BA10E10091E545 /* TestViewController.xib */; };
 		485C4DB517BD930F0091E545 /* ClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 485C4DB417BD930F0091E545 /* ClientManager.m */; };
 		485C4DB817BD93420091E545 /* MealObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 485C4DB717BD93410091E545 /* MealObject.m */; };
 		485C4DC117BE273F0091E545 /* DishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485C4DBA17BE273E0091E545 /* DishViewController.m */; };
@@ -47,16 +43,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1353FAED17B9F5BB00BBBF7A /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
-		1353FAEE17B9F5BB00BBBF7A /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		1353FAF017B9F73200BBBF7A /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
 		1353FAF117B9F73200BBBF7A /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
 		1353FAF317B9F75C00BBBF7A /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
-		485C4D8B17BA0DDD0091E545 /* TraktAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TraktAPIClient.h; sourceTree = "<group>"; };
-		485C4D8C17BA0DDD0091E545 /* TraktAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TraktAPIClient.m; sourceTree = "<group>"; };
-		485C4D9117BA10E10091E545 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
-		485C4D9217BA10E10091E545 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
-		485C4D9317BA10E10091E545 /* TestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestViewController.xib; sourceTree = "<group>"; };
 		485C4DB317BD930F0091E545 /* ClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientManager.h; sourceTree = "<group>"; };
 		485C4DB417BD930F0091E545 /* ClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientManager.m; sourceTree = "<group>"; };
 		485C4DB617BD93410091E545 /* MealObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MealObject.h; sourceTree = "<group>"; };
@@ -171,16 +160,9 @@
 				485C4DBC17BE273F0091E545 /* en.lproj */,
 				485C4DB617BD93410091E545 /* MealObject.h */,
 				485C4DB717BD93410091E545 /* MealObject.m */,
-				1353FAED17B9F5BB00BBBF7A /* MenuViewController.h */,
-				1353FAEE17B9F5BB00BBBF7A /* MenuViewController.m */,
 				48B49B5917B4819000A610E5 /* Supporting Files */,
 				485C4DBF17BE273F0091E545 /* TableViewController.h */,
 				485C4DC017BE273F0091E545 /* TableViewController.m */,
-				485C4D9117BA10E10091E545 /* TestViewController.h */,
-				485C4D9217BA10E10091E545 /* TestViewController.m */,
-				485C4D9317BA10E10091E545 /* TestViewController.xib */,
-				485C4D8B17BA0DDD0091E545 /* TraktAPIClient.h */,
-				485C4D8C17BA0DDD0091E545 /* TraktAPIClient.m */,
 			);
 			path = YMeal;
 			sourceTree = "<group>";
@@ -294,7 +276,6 @@
 				48B49B6517B4819000A610E5 /* Default.png in Resources */,
 				48B49B6717B4819000A610E5 /* Default@2x.png in Resources */,
 				48B49B6917B4819000A610E5 /* Default-568h@2x.png in Resources */,
-				485C4D9517BA10E10091E545 /* TestViewController.xib in Resources */,
 				1353FAF417B9F75C00BBBF7A /* CustomCell.xib in Resources */,
 				485C4DC217BE273F0091E545 /* DishViewController.xib in Resources */,
 				485C4DC317BE273F0091E545 /* InfoPlist.strings in Resources */,
@@ -364,9 +345,6 @@
 			files = (
 				48B49B5F17B4819000A610E5 /* main.m in Sources */,
 				48B49B6317B4819000A610E5 /* AppDelegate.m in Sources */,
-				485C4D8D17BA0DDD0091E545 /* TraktAPIClient.m in Sources */,
-				485C4D9417BA10E10091E545 /* TestViewController.m in Sources */,
-				1353FAEF17B9F5BB00BBBF7A /* MenuViewController.m in Sources */,
 				1353FAF217B9F73200BBBF7A /* CustomCell.m in Sources */,
 				485C4DB517BD930F0091E545 /* ClientManager.m in Sources */,
 				485C4DB817BD93420091E545 /* MealObject.m in Sources */,
