@@ -107,13 +107,24 @@
     
     if (indexPath.row < [self.mealsArray count]) {
         MealObject *meal = [self.mealsArray objectAtIndex:indexPath.row];
-        cell.category.text = [meal name];
+        cell.category.text = [[meal name] uppercaseString];
         cell.menuname.text = [meal name];
     }
     else {
         cell.category.text = @"WUT";
         cell.menuname.text = @"WUT";
     }
+    
+    UIColor * color1 = [UIColor colorWithRed:239/255.0f green:235/255.0f blue:214/255.0f alpha:1.0f];
+    UIColor * color2 = [UIColor colorWithRed:231/255.0f green:223/255.0f blue:156/255.0f alpha:1.0f];
+    
+    if (indexPath.row % 2)
+    {
+        [cell.contentView setBackgroundColor:color1];
+    }
+    else [cell.contentView setBackgroundColor:color2];
+    
+    
     return cell;
 }
 
@@ -174,26 +185,60 @@
     NSLog(@"The section:%d The row:%d", indexPath.section, indexPath.row);
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//{
+//    if (section < [[self.cafeToMealsMap allKeys] count]) {
+//        return (NSString *)[[self.cafeToMealsMap allKeys] objectAtIndex:section];
+//    }
+//    
+//    
+//    return @"WUT";
+//}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UILabel *lbl = [[UILabel alloc] init];
+    lbl.textAlignment = UITextAlignmentCenter;
+    lbl.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];
+//    lbl.text = @"My Centered Header";
+    
+    UIColor * color1 = [UIColor colorWithRed:231/255.0f green:195/255.0f blue:156/255.0f alpha:1.0f];
+    lbl.textColor = [UIColor whiteColor];
+    lbl.backgroundColor = color1;
+    lbl.shadowColor = color1;
+    lbl.shadowOffset = CGSizeMake(0,1);
+//    lbl.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"my_head_bg"]];
+    lbl.alpha = 0.9;
+    
     if (section < [[self.cafeToMealsMap allKeys] count]) {
-        return (NSString *)[[self.cafeToMealsMap allKeys] objectAtIndex:section];
+        lbl.text = [(NSString *)[[self.cafeToMealsMap allKeys] objectAtIndex:section] uppercaseString];
     }
-    return @"WUT";
+    return lbl;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
-{
-    if (section < [[self.cafeToMealsMap allKeys] count]) {
-        return (NSString *)[[self.cafeToMealsMap allKeys] objectAtIndex:section];
-    }
-    return @"WUT";
-}
+//- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+//{
+//    if (section < [[self.cafeToMealsMap allKeys] count]) {
+//        return (NSString *)[[self.cafeToMealsMap allKeys] objectAtIndex:section];
+//    }
+//    return @"WUT";
+//}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
     return 100;
 }
+
+//- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
+////    if (section == integerRepresentingYourSectionOfInterest)
+//        [headerView setBackgroundColor:[UIColor redColor]];
+////    else
+////        [headerView setBackgroundColor:[UIColor clearColor]];
+//    
+//    
+//    return headerView;
+//}
 
 //- (void) onLikeButton:(UIButton *)likeButton {
 //    NSLog(@"Like Pushed");
