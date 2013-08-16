@@ -49,6 +49,12 @@
     
     // fetching data
     
+    UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshMeals)];
+                                      
+                                      
+                                      //initWithTitle:nil style:UIBarButtonSystemItemRefresh target:self action:@selector(refreshPropertyList:)];
+    self.navigationItem.rightBarButtonItem = anotherButton;
+    
     [self refreshMeals];
 }
 
