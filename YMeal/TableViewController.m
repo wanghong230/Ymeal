@@ -297,8 +297,8 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UILabel *lbl = [[UILabel alloc] init];
     lbl.textAlignment = UITextAlignmentCenter;
-    lbl.font = [UIFont fontWithName:@"Helvetica-Bold" size:28];
-    [lbl.superview setFrame:CGRectMake(50, 50, lbl.frame.size.width, lbl.frame.size.height)];
+    lbl.font = [UIFont fontWithName:@"Helvetica-Bold" size:23];
+//    [lbl.superview setFrame:CGRectMake(50, 50, lbl.frame.size.width, lbl.frame.size.height)];
     
     UIColor * color1 = [UIColor colorWithRed:98/255.0f green:0/255.0f blue:139/255.0f alpha:1.0f];
     lbl.textColor = [UIColor whiteColor];
@@ -314,6 +314,12 @@
     return lbl;
 }
 
+
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 50;
+    
+}
 //- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 //{
 //    if (section < [[self.cafeToMealsMap allKeys] count]) {
