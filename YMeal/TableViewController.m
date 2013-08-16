@@ -391,6 +391,10 @@
     //TODO: find meal
     NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:sectionInt];
     MealObject *meal = [[self.cafeToMealsMap objectForKey:key] objectAtIndex: rowInt];
+    //TODO move
+    meal.numLikes = meal.numLikes + 1;
+    meal.voted = @"like";
+    [self.tableView reloadData];
     NSLog(meal.name);
     NSString *mealid = [meal.mealID stringValue];
     NSURLRequest *request = [client requestWithMethod:@"POST" path:@"" parameters:@{@"deviceid": self.deviceID, @"mealid": mealid}];
@@ -411,9 +415,13 @@
     NSURL *url = [NSURL URLWithString:self.baseurl];
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
     //NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    //TODO: find meal
     NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:sectionInt];
     MealObject *meal = [[self.cafeToMealsMap objectForKey:key] objectAtIndex: rowInt];
+    //TODO move to success
+    meal.numDislikes = meal.numDislikes + 1;
+    meal.voted = @"dislike";
+    [self.tableView reloadData];
+    
     NSLog(meal.name);
     NSString *mealid = [meal.mealID stringValue];
     NSURLRequest *request = [client requestWithMethod:@"POST" path:@"" parameters:@{@"deviceid": self.deviceID, @"mealid": mealid}];
