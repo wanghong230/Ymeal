@@ -283,14 +283,14 @@
 - (IBAction)onTouchLike:(UIButton *)sender {
     NSLog(@"AAAA %d", sender.tag);
     // send post request to backend
-    
+    [self postLikeMeal:sender.tag];
     [self performSelector:@selector(highlightButton:) withObject:sender afterDelay:0.0];
 }
 
 - (IBAction)onTouchDislike:(UIButton *)sender {
     NSLog(@"BBB %d", sender.tag);
     // send post request to backend
-
+    [self postDislikeMeal:sender.tag];
     [self performSelector:@selector(highlightButton:) withObject:sender afterDelay:0.0];
 }
 
@@ -329,7 +329,6 @@
                                                                                            // populating self.cafeToMealsMap
                                                                                            for (MealObject *meal in self.mealsArray) {
                                                                                                if (![self.cafeToMealsMap objectForKey: meal.cafeteria]) {
-                                                                                                   NSLog(@"%@ not in dict", meal.cafeteria);
                                                                                                    NSMutableArray *cafeMealsArray = [[NSMutableArray alloc] init];
                                                                                                    [self.cafeToMealsMap setObject:cafeMealsArray forKey:meal.cafeteria];
                                                                                                }
