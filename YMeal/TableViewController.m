@@ -80,7 +80,9 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return [self.mealsArray count];
+    NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:section];
+    NSArray *cafeMeals = [self.cafeToMealsMap objectForKey:key];
+    return [cafeMeals count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -115,8 +117,11 @@
     }
     */
     
-    if (indexPath.row < [self.mealsArray count]) {
-        MealObject *meal = [self.mealsArray objectAtIndex:indexPath.row];
+    NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:indexPath.section];
+    NSArray *cafeMeals = [self.cafeToMealsMap objectForKey:key];
+
+    if (indexPath.row < [cafeMeals count]) {
+        MealObject *meal = [cafeMeals objectAtIndex:indexPath.row];
         cell.category.text = [[meal name] uppercaseString];
         cell.menuname.text = [meal name];
     }
@@ -191,6 +196,14 @@
     DishViewController *dish = [[DishViewController alloc] init];
     dish.rowSelectedPreviously = indexPath.row;
     dish.sectionSelectedPreviously = indexPath.section;
+    // set dish
+    NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:indexPath.section];
+
+    NSLog(@"section selected: %d, row selected: %d, key: %@, allKeys count: %d", indexPath.section, indexPath.row, key, [[self.cafeToMealsMap allKeys] count]);
+    NSArray *cafeMeals = [self.cafeToMealsMap objectForKey:key];
+    NSLog(@"array size: %d", [cafeMeals count]);
+    MealObject *meal = [[self.cafeToMealsMap objectForKey:key] objectAtIndex:indexPath.row];
+    dish.meal = meal;
     [self.navigationController pushViewController:dish animated:TRUE];
     NSLog(@"The section:%d The row:%d", indexPath.section, indexPath.row);
 }
@@ -269,11 +282,15 @@
 
 - (IBAction)onTouchLike:(UIButton *)sender {
     NSLog(@"AAAA %d", sender.tag);
+    // send post request to backend
+    
     [self performSelector:@selector(highlightButton:) withObject:sender afterDelay:0.0];
 }
 
 - (IBAction)onTouchDislike:(UIButton *)sender {
     NSLog(@"BBB %d", sender.tag);
+    // send post request to backend
+
     [self performSelector:@selector(highlightButton:) withObject:sender afterDelay:0.0];
 }
 

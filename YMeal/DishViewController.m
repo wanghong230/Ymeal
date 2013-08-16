@@ -37,12 +37,14 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.]
-    
+    /*
     if(rowSelectedPreviously == 0) {
         self.description.text = @"IOS hard to use";
     } else {
         self.description.text = @"Maybe Android is good";
     }
+     */
+    self.description.text = self.meal.description;
 }
 
 - (void)didReceiveMemoryWarning
