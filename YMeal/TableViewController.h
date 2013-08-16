@@ -10,4 +10,6 @@
 
 @interface TableViewController : UITableViewController
 -(void)refreshMeals;
+-(void) postLikeMeal:(int)encodedTag;
+-(void) postDislikeMeal: (int)encodedTag;
 @end

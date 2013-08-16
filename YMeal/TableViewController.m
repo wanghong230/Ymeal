@@ -10,6 +10,7 @@
 #import "CustomCell.h"
 #import "DishViewController.h"
 #import <AFJSONRequestOperation.h>
+#import <AFHTTPClient.h>
 #import "MealObject.h"
 
 @interface TableViewController ()
@@ -17,7 +18,7 @@
 @property(nonatomic, strong) NSMutableDictionary *cafeToMealsMap;
 @property(nonatomic, strong) NSMutableArray *mealsArray;
 @property(nonatomic, strong) NSString *baseurl;
-
+@property(nonatomic, strong) NSString *deviceID;
 @end
 
 @implementation TableViewController
@@ -30,6 +31,8 @@
         self.mealsArray = [[NSMutableArray alloc] init];
         self.cafeToMealsMap = [[NSMutableDictionary alloc] init];
         self.baseurl = @"http://ec2-50-19-203-2.compute-1.amazonaws.com/api/meal";
+        self.deviceID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+
     }
     return self;
 }
@@ -77,7 +80,9 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return [self.mealsArray count];
+    NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:section];
+    NSArray *cafeMeals = [self.cafeToMealsMap objectForKey:key];
+    return [cafeMeals count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -112,8 +117,11 @@
     }
     */
     
-    if (indexPath.row < [self.mealsArray count]) {
-        MealObject *meal = [self.mealsArray objectAtIndex:indexPath.row];
+    NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:indexPath.section];
+    NSArray *cafeMeals = [self.cafeToMealsMap objectForKey:key];
+
+    if (indexPath.row < [cafeMeals count]) {
+        MealObject *meal = [cafeMeals objectAtIndex:indexPath.row];
         cell.category.text = [[meal name] uppercaseString];
         cell.menuname.text = [meal name];
     }
@@ -205,6 +213,14 @@
     DishViewController *dish = [[DishViewController alloc] init];
     dish.rowSelectedPreviously = indexPath.row;
     dish.sectionSelectedPreviously = indexPath.section;
+    // set dish
+    NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:indexPath.section];
+
+    NSLog(@"section selected: %d, row selected: %d, key: %@, allKeys count: %d", indexPath.section, indexPath.row, key, [[self.cafeToMealsMap allKeys] count]);
+    NSArray *cafeMeals = [self.cafeToMealsMap objectForKey:key];
+    NSLog(@"array size: %d", [cafeMeals count]);
+    MealObject *meal = [[self.cafeToMealsMap objectForKey:key] objectAtIndex:indexPath.row];
+    dish.meal = meal;
     [self.navigationController pushViewController:dish animated:TRUE];
     NSLog(@"The section:%d The row:%d", indexPath.section, indexPath.row);
 }
@@ -283,10 +299,13 @@
 
 - (IBAction)onTouchLike:(UIButton *)sender {
     NSLog(@"AAAA %d", sender.tag);
+
     [sender setEnabled:FALSE];
     CustomCell *cell = (CustomCell *)[[sender superview] superview];
     UIButton *dislikeButton = cell.dislike;
     [dislikeButton setEnabled:FALSE];
+    // send post request to backend
+    [self postLikeMeal:sender.tag];
     [self performSelector:@selector(highlightButton:) withObject:sender afterDelay:0.0];
 }
 
@@ -296,6 +315,7 @@
     CustomCell *cell = (CustomCell *)[[sender superview] superview];
     UIButton *likeButton = cell.like;
     [likeButton setEnabled:FALSE];
+    [self postDislikeMeal:sender.tag];
     [self performSelector:@selector(highlightButton:) withObject:sender afterDelay:0.0];
 }
 
@@ -303,8 +323,9 @@
 - (void) refreshMeals {
     NSLog(@"in refreshMeals");
     NSURL *url = [NSURL URLWithString:self.baseurl];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    //self.mealsArray = [[NSMutableArray alloc] init];
+    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
+    //NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSURLRequest *request = [client requestWithMethod:@"GET" path:@"" parameters:@{@"deviceid": self.deviceID}];
     AFJSONRequestOperation *operation =[AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
                                                                                            NSData *jsonData = (NSData *)JSON;
@@ -333,7 +354,6 @@
                                                                                            // populating self.cafeToMealsMap
                                                                                            for (MealObject *meal in self.mealsArray) {
                                                                                                if (![self.cafeToMealsMap objectForKey: meal.cafeteria]) {
-                                                                                                   NSLog(@"%@ not in dict", meal.cafeteria);
                                                                                                    NSMutableArray *cafeMealsArray = [[NSMutableArray alloc] init];
                                                                                                    [self.cafeToMealsMap setObject:cafeMealsArray forKey:meal.cafeteria];
                                                                                                }
@@ -353,4 +373,47 @@
     
 }
 
+-(void) postLikeMeal:(int)encodedTag {
+    NSLog(@"in postLikeMeal");
+    int sectionInt = encodedTag / 1000;
+    int rowInt = encodedTag % 1000;
+    NSURL *url = [NSURL URLWithString:self.baseurl];
+    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
+    //NSURLRequest *request = [NSURLRequest requestWithURL:url];    
+    //TODO: find meal
+    NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:sectionInt];
+    MealObject *meal = [[self.cafeToMealsMap objectForKey:key] objectAtIndex: rowInt];
+    NSString *mealid = [meal.mealID stringValue];
+    NSURLRequest *request = [client requestWithMethod:@"POST" path:@"" parameters:@{@"deviceid": self.deviceID, @"mealid": mealid}];
+    AFJSONRequestOperation *operation =[AFJSONRequestOperation JSONRequestOperationWithRequest:request
+        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+            NSLog(@"successful like post");
+        }
+        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+            NSLog(@"error response");
+        }];
+    [operation start];
+}
+
+-(void) postDislikeMeal:(int)encodedTag {
+    NSLog(@"in postDISLIKEMeal");
+    int sectionInt = encodedTag / 1000;
+    int rowInt = encodedTag % 1000;
+    NSURL *url = [NSURL URLWithString:self.baseurl];
+    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
+    //NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    //TODO: find meal
+    NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:sectionInt];
+    MealObject *meal = [[self.cafeToMealsMap objectForKey:key] objectAtIndex: rowInt];
+    NSString *mealid = [meal.mealID stringValue];
+    NSURLRequest *request = [client requestWithMethod:@"POST" path:@"" parameters:@{@"deviceid": self.deviceID, @"mealid": mealid}];
+    AFJSONRequestOperation *operation =[AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                                                           NSLog(@"successful like post");
+                                                                                       }
+                                                                                       failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                                                           NSLog(@"error response");
+                                                                                       }];
+    [operation start];
+}
 @end
