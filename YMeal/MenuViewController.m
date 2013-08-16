@@ -41,7 +41,6 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    //test networking stuff
     // initialize client
     self.clientManager = [[ClientManager alloc] init];
     NSDictionary* mealsMap = self.clientManager.getMeals;

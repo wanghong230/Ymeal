@@ -10,7 +10,7 @@
 #import <AFJSONRequestOperation.h>
 
 @interface ClientManager()
-@property(strong) NSDictionary *rawJSON;
+@property(strong) NSString *rawJSON;
 @property(strong) NSString *baseURL;
 @end
 
@@ -28,16 +28,14 @@
 - (NSDictionary *) getMeals {
     // string to array of mealobjects
     NSDictionary* cafeToMealsMap = [[NSDictionary alloc] init];
-    //NSDictionary* rawJSON = [[NSDictionary alloc] init];
-    self.rawJSON = [[NSDictionary alloc] init];
-    //test networking stuff
+    self.rawJSON = [[NSString alloc] init];
     NSURL *url = [NSURL URLWithString:self.baseURL];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                                                                                            self.rawJSON  = (NSDictionary *)JSON;
+                                                                                            self.rawJSON  = (NSString *)JSON;
                                                                                             
-                                                                                            NSLog([NSString stringWithFormat:@"%@", [self.rawJSON description]]);
+                                                                                            NSLog([NSString stringWithFormat:@"%@", self.rawJSON]);
                                                                                         }
                                          
                                                                                         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
@@ -46,6 +44,20 @@
     
     [operation start];
     
+    //NSObject *meals = [NSJSONSerialization JSONObjectWithData:self.rawJSON options:NSJSONReadingMutableContainers error:nil];
+    //NSLog(@"meals.count:%d", [meals count]);
+    
+    //NSData *data = [self.rawJSON dataUsingEncoding:NSUTF8StringEncoding];
+    //NSLog(@"lalala");
+    /*
+    if (data == nil) {
+        
+        NSLog(@"null");
+    }
+    NSError *e;
+    NSArray *array = [NSJSONSerialization JSONObjectWithData:self.rawJSON options:NSJSONReadingMutableContainers error:&e];
+    //NSLog(@"array count: %d", [array count]);
+     */
     return cafeToMealsMap;
 }
 
