@@ -16,6 +16,8 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *description;
 @property (nonatomic, strong) NSString *category;
+// "breakfast", "lunch", "dinner"
+@property (nonatomic, strong) NSString *bld;
 // "none", "like", "dislike"
 @property (nonatomic, strong) NSString *voted;
 @property int numLikes;
