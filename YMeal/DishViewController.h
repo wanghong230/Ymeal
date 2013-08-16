@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MealObject.h"
 
 @interface DishViewController : UIViewController {
     int rowSelectedPreviously;
@@ -14,7 +15,10 @@
     
 }
 @property (nonatomic, weak) IBOutlet UILabel *description;
+@property (nonatomic, weak) IBOutlet UILabel *numOfLike;
+@property (nonatomic, weak) IBOutlet UILabel *numOfDislike;
 @property (nonatomic) int rowSelectedPreviously;
 @property (nonatomic) int sectionSelectedPreviously;
+@property (nonatomic, weak) MealObject *meal;
 
 @end

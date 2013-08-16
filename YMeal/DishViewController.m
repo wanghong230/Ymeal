@@ -16,13 +16,19 @@
 
 @synthesize rowSelectedPreviously;
 @synthesize sectionSelectedPreviously;
+@synthesize meal;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"Dish";
+        // self.title = @"Dish";
+        
+        // Use meal oject to set things here
+        
+//        self.numOfLike =
+//        self.numOfDislike = 
     }
     return self;
 }
