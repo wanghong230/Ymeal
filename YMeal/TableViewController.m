@@ -459,8 +459,8 @@
                                                                                                meal.category = (NSString *) [dict objectForKey:@"category"];
                                                                                                meal.bld = (NSString *) [dict objectForKey:@"bld"];
                                                                                                meal.voted = @"none";
-                                                                                               meal.numLikes = 500;
-                                                                                               meal.numDislikes = 500;
+                                                                                               meal.numLikes = arc4random() % 100;
+                                                                                               meal.numDislikes = arc4random() %100;
                                                                                                [tmpArray addObject:meal];
                                                                                            }
                                                                                            for (MealObject *meal in self.mealsArray) {
