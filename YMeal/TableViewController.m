@@ -373,7 +373,6 @@
     [self postLikeMeal:sender.tag];
     
     //increment UI by 1;
-    NSLog(@"incrementing like");
     int sectionInt = (sender.tag % 10000) / 1000;
     int rowInt = sender.tag % 1000;
     NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:sectionInt];
@@ -397,7 +396,6 @@
     [self postDislikeMeal:sender.tag];
     
     //increment UI by 1;
-    NSLog(@"increment dislike");
     int sectionInt = (sender.tag % 10000) / 1000;
     int rowInt = sender.tag % 1000;
     NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:sectionInt];
@@ -442,6 +440,7 @@
                                                                                            // create new objects and throw away old
                                                                                            self.mealsArray = [[NSMutableArray alloc] init];
                                                                                            self.cafeToMealsMap = [[NSMutableDictionary alloc] init];
+                                                                                           NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
                                                                                            
                                                                                            // populating self.mealsArray
                                                                                            for (id obj in jsonArray) {
@@ -454,15 +453,46 @@
                                                                                                meal.cafeteria = (NSString *) [dict objectForKey:@"cafeteria"];
                                                                                                meal.name = (NSString *) [dict objectForKey:@"name"];
                                                                                                meal.category = (NSString *) [dict objectForKey:@"category"];
+                                                                                               meal.bld = (NSString *) [dict objectForKey:@"bld"];
                                                                                                meal.voted = @"none";
                                                                                                meal.numLikes = 500;
                                                                                                meal.numDislikes = 500;
-                                                                                               [self.mealsArray addObject:meal];
+                                                                                               [tmpArray addObject:meal];
                                                                                            }
                                                                                            for (MealObject *meal in self.mealsArray) {
                                                                                                NSLog([meal name]);
                                                                                            }
                                                                                            
+                                                                                           // filter conditions
+                                                                                           NSDate *today = [NSDate date];
+                                                                                           //NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                                                                                           NSCalendar *calendar = [NSCalendar currentCalendar];
+                                                                                           NSDateComponents *components = [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:today];
+                                                                                           NSInteger hour = [components hour];
+                                                                                           NSLog(@"current hour: %d", hour);
+                                                                                           // filter by time of day only display upcoming meals
+                                                                                           for (MealObject *meal in tmpArray) {
+                                                                                               if (hour < 11) {
+                                                                                                   //breakfast
+                                                                                                   if ([meal.bld isEqualToString:@"breakfast"]) {
+                                                                                                       [self.mealsArray addObject:meal];
+                                                                                                   }
+                                                                                               }
+                                                                                               else if (hour < 16) {
+                                                                                                   //lunch
+                                                                                                   if ([meal.bld isEqualToString:@"lunch"]) {
+                                                                                                       [self.mealsArray addObject:meal];
+                                                                                                   }
+                                                                                               }
+                                                                                               else {
+                                                                                                   //dinner
+                                                                                                   if ([meal.bld isEqualToString:@"dinner"]) {
+                                                                                                       [self.mealsArray addObject:meal];
+                                                                                                   }
+                                                                                               }
+                                                                                           }
+                                                                                           NSLog(@"total meals: %d", [tmpArray count]);
+                                                                                           NSLog(@"current meals: %d", [self.mealsArray count]);
                                                                                            // populating self.cafeToMealsMap
                                                                                            for (MealObject *meal in self.mealsArray) {
                                                                                                if (![self.cafeToMealsMap objectForKey: meal.cafeteria]) {
@@ -474,6 +504,20 @@
                                                                                                
                                                                                            }
                                                                                            
+                                                                                           //sort each array by numlikes, then alpha
+                                                                                           NSArray *keys = [self.cafeToMealsMap allKeys];
+                                                                                           
+                                                                                           for (NSString *key in keys) {
+                                                                                               NSMutableArray *cafeArray = [self.cafeToMealsMap objectForKey:key];
+                                                                                               NSSortDescriptor *byLike = [[NSSortDescriptor alloc] initWithKey:@"numLikes" ascending:NO];
+                                                                                               NSSortDescriptor *byName = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+                                                                                               
+                                                                                               
+                                                                                               [cafeArray sortUsingDescriptors:[NSArray arrayWithObjects:byLike, byName, nil]];
+                                                                                              
+                                                                                          
+                                                                                           }
+                                                                                           //
                                                                                            [self.tableView reloadData];
                                                                                        }
                                         
@@ -523,11 +567,16 @@
     NSLog(@"in postDISLIKEMeal");
     int sectionInt = (encodedTag % 10000) / 1000;
     int rowInt = encodedTag % 1000;
-    NSURL *url = [NSURL URLWithString:self.baseurl];
-    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
-    //NSURLRequest *request = [NSURLRequest requestWithURL:url];
     NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:sectionInt];
     MealObject *meal = [[self.cafeToMealsMap objectForKey:key] objectAtIndex: rowInt];
+    
+    NSString *dislikeURLpostfix = [NSString stringWithFormat:@"%d/dislike", meal.mealID];
+    NSString *dislikeURL = [self.baseurl stringByAppendingString:dislikeURLpostfix];
+    NSLog(@"dislikeURL: %@", dislikeURL);
+
+    NSURL *url = [NSURL URLWithString:dislikeURL];
+    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
+
     
     //TODO move to success
     meal.numDislikes = meal.numDislikes + 1;
@@ -535,9 +584,7 @@
     
     NSLog(meal.name);
     NSString *mealid = [meal.mealID stringValue];
-    NSLog(@"meal.mealID: %@", mealid);
     NSURLRequest *request = [client requestWithMethod:@"POST" path:@"" parameters:@{@"deviceid": self.deviceID, @"mealid": mealid}];
-    NSLog(@"created request");
     AFJSONRequestOperation *operation =[AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
                                                                                            NSLog(@"successful like post");
