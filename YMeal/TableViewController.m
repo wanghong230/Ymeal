@@ -365,6 +365,7 @@
 - (IBAction)onTouchLike:(UIButton *)sender {
     NSLog(@"AAAA %d", sender.tag);
 
+    [sender setBackgroundColor:[UIColor grayColor]];
     [sender setEnabled:FALSE];
     CustomCell *cell = (CustomCell *)[[sender superview] superview];
     UIButton *dislikeButton = cell.dislike;
@@ -387,6 +388,7 @@
 
 - (IBAction)onTouchDislike:(UIButton *)sender {
     NSLog(@"BBB %d", sender.tag);
+    [sender setBackgroundColor:[UIColor grayColor]];
     [sender setEnabled:FALSE];
     CustomCell *cell = (CustomCell *)[[sender superview] superview];
     UIButton *likeButton = cell.like;
@@ -408,6 +410,7 @@
 }
 
 - (IBAction)onTouchLikeFake:(UIButton *)sender {
+    [sender setBackgroundColor:[UIColor grayColor]];
     [sender setEnabled:FALSE];
     CustomCell *cell = (CustomCell *)[[sender superview] superview];
     UIButton *dislikeButton = cell.dislike;
@@ -416,6 +419,7 @@
 }
 
 - (IBAction)onTouchDislikeFake:(UIButton *)sender {
+    [sender setBackgroundColor:[UIColor grayColor]];
     [sender setEnabled:FALSE];
     CustomCell *cell = (CustomCell *)[[sender superview] superview];
     UIButton *likeButton = cell.like;
