@@ -15,6 +15,10 @@
 		485C4D9517BA10E10091E545 /* TestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 485C4D9317BA10E10091E545 /* TestViewController.xib */; };
 		485C4DB517BD930F0091E545 /* ClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 485C4DB417BD930F0091E545 /* ClientManager.m */; };
 		485C4DB817BD93420091E545 /* MealObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 485C4DB717BD93410091E545 /* MealObject.m */; };
+		485C4DC117BE273F0091E545 /* DishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485C4DBA17BE273E0091E545 /* DishViewController.m */; };
+		485C4DC217BE273F0091E545 /* DishViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 485C4DBB17BE273E0091E545 /* DishViewController.xib */; };
+		485C4DC317BE273F0091E545 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 485C4DBD17BE273F0091E545 /* InfoPlist.strings */; };
+		485C4DC417BE273F0091E545 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 485C4DC017BE273F0091E545 /* TableViewController.m */; };
 		48B49B5317B4819000A610E5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B49B5217B4819000A610E5 /* UIKit.framework */; };
 		48B49B5517B4819000A610E5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B49B5417B4819000A610E5 /* Foundation.framework */; };
 		48B49B5717B4819000A610E5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B49B5617B4819000A610E5 /* CoreGraphics.framework */; };
@@ -57,6 +61,12 @@
 		485C4DB417BD930F0091E545 /* ClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientManager.m; sourceTree = "<group>"; };
 		485C4DB617BD93410091E545 /* MealObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MealObject.h; sourceTree = "<group>"; };
 		485C4DB717BD93410091E545 /* MealObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MealObject.m; sourceTree = "<group>"; };
+		485C4DB917BE273E0091E545 /* DishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DishViewController.h; sourceTree = "<group>"; };
+		485C4DBA17BE273E0091E545 /* DishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DishViewController.m; sourceTree = "<group>"; };
+		485C4DBB17BE273E0091E545 /* DishViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DishViewController.xib; sourceTree = "<group>"; };
+		485C4DBE17BE273F0091E545 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
+		485C4DBF17BE273F0091E545 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		485C4DC017BE273F0091E545 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		48B49B4F17B4819000A610E5 /* YMeal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YMeal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48B49B5217B4819000A610E5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		48B49B5417B4819000A610E5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -105,6 +115,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		485C4DBC17BE273F0091E545 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				485C4DBD17BE273F0091E545 /* InfoPlist.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
 		48B49B4617B4819000A610E5 = {
 			isa = PBXGroup;
 			children = (
@@ -147,11 +165,17 @@
 				1353FAF017B9F73200BBBF7A /* CustomCell.h */,
 				1353FAF117B9F73200BBBF7A /* CustomCell.m */,
 				1353FAF317B9F75C00BBBF7A /* CustomCell.xib */,
+				485C4DB917BE273E0091E545 /* DishViewController.h */,
+				485C4DBA17BE273E0091E545 /* DishViewController.m */,
+				485C4DBB17BE273E0091E545 /* DishViewController.xib */,
+				485C4DBC17BE273F0091E545 /* en.lproj */,
 				485C4DB617BD93410091E545 /* MealObject.h */,
 				485C4DB717BD93410091E545 /* MealObject.m */,
 				1353FAED17B9F5BB00BBBF7A /* MenuViewController.h */,
 				1353FAEE17B9F5BB00BBBF7A /* MenuViewController.m */,
 				48B49B5917B4819000A610E5 /* Supporting Files */,
+				485C4DBF17BE273F0091E545 /* TableViewController.h */,
+				485C4DC017BE273F0091E545 /* TableViewController.m */,
 				485C4D9117BA10E10091E545 /* TestViewController.h */,
 				485C4D9217BA10E10091E545 /* TestViewController.m */,
 				485C4D9317BA10E10091E545 /* TestViewController.xib */,
@@ -272,6 +296,8 @@
 				48B49B6917B4819000A610E5 /* Default-568h@2x.png in Resources */,
 				485C4D9517BA10E10091E545 /* TestViewController.xib in Resources */,
 				1353FAF417B9F75C00BBBF7A /* CustomCell.xib in Resources */,
+				485C4DC217BE273F0091E545 /* DishViewController.xib in Resources */,
+				485C4DC317BE273F0091E545 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +370,8 @@
 				1353FAF217B9F73200BBBF7A /* CustomCell.m in Sources */,
 				485C4DB517BD930F0091E545 /* ClientManager.m in Sources */,
 				485C4DB817BD93420091E545 /* MealObject.m in Sources */,
+				485C4DC117BE273F0091E545 /* DishViewController.m in Sources */,
+				485C4DC417BE273F0091E545 /* TableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +394,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		485C4DBD17BE273F0091E545 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				485C4DBE17BE273F0091E545 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		48B49B5B17B4819000A610E5 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

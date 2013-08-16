@@ -1,16 +1,14 @@
 //
 //  AppDelegate.m
-//  YMeal
+//  YahooMeal
 //
-//  Created by Qian  Long on 8/8/13.
-//
+//  Created by Hong  Wang on 8/15/13.
+//  Copyright (c) 2013 Hong  Wang. All rights reserved.
 //
 
 #import "AppDelegate.h"
-#import <AFNetworking.h>
-#import "TestViewController.h"
 #import "MenuViewController.h"
-
+#import "TableViewController.h"
 
 @implementation AppDelegate
 
@@ -18,17 +16,16 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    MenuViewController *menuViewController = [[MenuViewController alloc] init];
-    UINavigationController *nvc = [[UINavigationController alloc] init];
-    self.window.rootViewController = menuViewController;
+//    MenuViewController *menuViewController = [[MenuViewController alloc] init];
+    TableViewController *tableViewController = [[TableViewController alloc] init];
+    
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:tableViewController];
+//    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:menuViewController];
+    self.window.rootViewController = nvc;
+    
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
-    //TestViewController *tvc = [[TestViewController alloc] init];
-    //self.window.rootViewController = tvc;
-    // Testing AFNetwork
-    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     return YES;
 }
 

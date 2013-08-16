@@ -1,9 +1,9 @@
 //
 //  AppDelegate.h
-//  YMeal
+//  YahooMeal
 //
-//  Created by Qian  Long on 8/8/13.
-//
+//  Created by Hong  Wang on 8/15/13.
+//  Copyright (c) 2013 Hong  Wang. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
