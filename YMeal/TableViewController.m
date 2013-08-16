@@ -95,7 +95,7 @@
     
     cell.like.tag = indexPath.section * 1000 + indexPath.row;
     [cell.like addTarget:self action:@selector(onTouchLike:) forControlEvents:UIControlEventTouchDown];
-    cell.dislike.tag = indexPath.section * 1000 + indexPath.row;
+    cell.dislike.tag = indexPath.section * 1000 + indexPath.row + 10000;
     [cell.dislike addTarget:self action:@selector(onTouchDislike:) forControlEvents:UIControlEventTouchDown];
     
 //    CustomCell *cell = [[CustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIndetifier];
@@ -282,6 +282,11 @@
 
 - (IBAction)onTouchLike:(UIButton *)sender {
     NSLog(@"AAAA %d", sender.tag);
+
+    [sender setEnabled:FALSE];
+    CustomCell *cell = (CustomCell *)[[sender superview] superview];
+    UIButton *dislikeButton = cell.dislike;
+    [dislikeButton setEnabled:FALSE];
     // send post request to backend
     [self postLikeMeal:sender.tag];
     [self performSelector:@selector(highlightButton:) withObject:sender afterDelay:0.0];
@@ -289,7 +294,10 @@
 
 - (IBAction)onTouchDislike:(UIButton *)sender {
     NSLog(@"BBB %d", sender.tag);
-    // send post request to backend
+    [sender setEnabled:FALSE];
+    CustomCell *cell = (CustomCell *)[[sender superview] superview];
+    UIButton *likeButton = cell.like;
+    [likeButton setEnabled:FALSE];
     [self postDislikeMeal:sender.tag];
     [self performSelector:@selector(highlightButton:) withObject:sender afterDelay:0.0];
 }
