@@ -156,17 +156,27 @@
         cell.menuname.text = @"WUT";
     }
     
-    UIColor * color1 = [UIColor colorWithRed:239/255.0f green:235/255.0f blue:214/255.0f alpha:1.0f];
-    UIColor * color2 = [UIColor colorWithRed:231/255.0f green:223/255.0f blue:156/255.0f alpha:1.0f];
+    UIColor * color1 = [UIColor colorWithRed:226/255.0f green:226/255.0f blue:226/255.0f alpha:1.0f];
+    UIColor * color2 = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f];
+    UIColor * color3 = [UIColor colorWithRed:80/255.0f green:0/255.0f blue:134/255.0f alpha:1.0f];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     if (indexPath.row % 2)
     {
-        [cell.contentView setBackgroundColor:color1];
-        [cell.accessoryView setBackgroundColor:color1];
+        [cell.contentView setBackgroundColor:color2];
+        [cell.accessoryView setBackgroundColor:color2];
+        [cell.menuname setTextColor:[UIColor blackColor]];
+        [cell.category  setTextColor:[UIColor blackColor]];
+        [cell.like setBackgroundColor:color3];
+        [cell.dislike setBackgroundColor:color3];
     } else {
         [cell.contentView setBackgroundColor:color2];
         [cell.accessoryView setBackgroundColor:color2];
+        [cell.menuname setTextColor:[UIColor blackColor]];
+        [cell.category  setTextColor:[UIColor blackColor]];
+        [cell.like setBackgroundColor:color3];
+        [cell.dislike setBackgroundColor:color3];
+//        [cell.menuname set]
     }
     return cell;
 }
@@ -174,15 +184,38 @@
 - (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
-    UIColor * color1 = [UIColor colorWithRed:239/255.0f green:235/255.0f blue:214/255.0f alpha:1.0f];
-    UIColor * color2 = [UIColor colorWithRed:231/255.0f green:223/255.0f blue:156/255.0f alpha:1.0f];
+    UIColor * color1 = [UIColor colorWithRed:226/255.0f green:226/255.0f blue:226/255.0f alpha:1.0f];
+    UIColor * color2 = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f];
+//    UIColor * color1 = [UIColor colorWithRed:254/255.0f green:220/255.0f blue:58/255.0f alpha:1.0f];
+//    UIColor * color2 = [UIColor colorWithRed:98/255.0f green:0/255.0f blue:139/255.0f alpha:1.0f];
+//    UIColor * color2 = [UIColor colorWithRed:151/255.0f green:141/255.0f blue:124/255.0f alpha:1.0f];
     
     if (indexPath.row % 2)
     {
-        cell.backgroundColor = color1;
+        cell.backgroundColor = color2;
     } else {
         cell.backgroundColor = color2;
+    }
+}
+
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    return[NSArray arrayWithObjects:@"U", @"E", @"B", @"G",nil];
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
+    
+    if([title isEqualToString:@"U"]) {
+        return 0;
+    } else if ([title isEqualToString:@"E"]) {
+        return 1;
+    } else if ([title isEqualToString:@"B"]) {
+        return 2;
+    } else if ([title isEqualToString:@"G"]) {
+        return 3;
+    } else {
+        return 4;
     }
 }
 
@@ -264,10 +297,10 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UILabel *lbl = [[UILabel alloc] init];
     lbl.textAlignment = UITextAlignmentCenter;
-    lbl.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];
-//    lbl.text = @"My Centered Header";
+    lbl.font = [UIFont fontWithName:@"Helvetica-Bold" size:28];
+    [lbl.superview setFrame:CGRectMake(50, 50, lbl.frame.size.width, lbl.frame.size.height)];
     
-    UIColor * color1 = [UIColor colorWithRed:231/255.0f green:195/255.0f blue:156/255.0f alpha:1.0f];
+    UIColor * color1 = [UIColor colorWithRed:98/255.0f green:0/255.0f blue:139/255.0f alpha:1.0f];
     lbl.textColor = [UIColor whiteColor];
     lbl.backgroundColor = color1;
     lbl.shadowColor = color1;
