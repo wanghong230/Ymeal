@@ -9,10 +9,12 @@
 #import "MenuViewController.h"
 #import "CustomCell.h"
 #import <AFJSONRequestOperation.h>
+#import "ClientManager.h"
 
 @interface MenuViewController ()
 
 @property(strong) NSDictionary *weather;
+@property(strong) ClientManager *clientManager;
 @end
 
 @implementation MenuViewController
@@ -40,20 +42,9 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     //test networking stuff
-    NSURL *url = [NSURL URLWithString:@"http://www.raywenderlich.com/downloads/weather_sample/weather.php?format=json"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-            self.weather  = (NSDictionary *)JSON;
-            
-            NSLog([NSString stringWithFormat:@"%@", [self.weather description]]);
-        }
-                                         
-        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-            NSLog(@"error response");
-        }];
-    
-    [operation start];
+    // initialize client
+    self.clientManager = [[ClientManager alloc] init];
+    NSDictionary* mealsMap = self.clientManager.getMeals;
     
 }
 
