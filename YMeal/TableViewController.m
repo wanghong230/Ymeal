@@ -30,7 +30,7 @@
         // Custom initialization
         self.mealsArray = [[NSMutableArray alloc] init];
         self.cafeToMealsMap = [[NSMutableDictionary alloc] init];
-        self.baseurl = @"http://ec2-50-19-203-2.compute-1.amazonaws.com/api/meal";
+        self.baseurl = @"http://ec2-50-19-203-2.compute-1.amazonaws.com/api/";
         self.deviceID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
 
     }
@@ -134,7 +134,7 @@
 
     if (indexPath.row < [cafeMeals count]) {
         MealObject *meal = [cafeMeals objectAtIndex:indexPath.row];
-        cell.category.text = [[meal name] uppercaseString];
+        cell.category.text = [[meal category] uppercaseString];
         cell.menuname.text = [meal name];
         NSString *likeText = [NSString stringWithFormat:@"Like(%d)", [meal numLikes]];
         NSString *dislikeText = [NSString stringWithFormat:@"Dislike(%d)", [meal numDislikes]];
@@ -387,7 +387,9 @@
 #pragma mark - communication to backend
 - (void) refreshMeals {
     NSLog(@"in refreshMeals");
-    NSURL *url = [NSURL URLWithString:self.baseurl];
+    NSString *mealsURL = [self.baseurl stringByAppendingString:@"meals"];
+    //NSLog(@"mealsURL %@", mealsURL);
+    NSURL *url = [NSURL URLWithString:[self.baseurl stringByAppendingString:@"meals"]];
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
     //NSURLRequest *request = [NSURLRequest requestWithURL:url];
     NSURLRequest *request = [client requestWithMethod:@"GET" path:@"" parameters:@{@"deviceid": self.deviceID}];
@@ -410,6 +412,7 @@
                                                                                                meal.dateStr = (NSString *)[dict objectForKey:@"date"];
                                                                                                meal.cafeteria = (NSString *) [dict objectForKey:@"cafeteria"];
                                                                                                meal.name = (NSString *) [dict objectForKey:@"name"];
+                                                                                               meal.category = (NSString *) [dict objectForKey:@"category"];
                                                                                                meal.voted = @"none";
                                                                                                meal.numLikes = 500;
                                                                                                meal.numDislikes = 500;
@@ -446,12 +449,17 @@
     
     int sectionInt = (encodedTag % 10000) / 1000;
     int rowInt = encodedTag % 1000;
+    
+    NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:sectionInt];
+    MealObject *meal = [[self.cafeToMealsMap objectForKey:key] objectAtIndex: rowInt];
+    NSString *listURLpostfix = [NSString stringWithFormat:@"%d//like", meal.mealID];
+    NSString *likeURL = [self.baseurl stringByAppendingString:listURLpostfix];
+    
+    NSLog(@"likeURL: %@", likeURL);
     NSURL *url = [NSURL URLWithString:self.baseurl];
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
     //NSURLRequest *request = [NSURLRequest requestWithURL:url];    
-    //TODO: find meal
-    NSString *key = [[self.cafeToMealsMap allKeys] objectAtIndex:sectionInt];
-    MealObject *meal = [[self.cafeToMealsMap objectForKey:key] objectAtIndex: rowInt];
+    
     //TODO move
     meal.numLikes = meal.numLikes + 1;
     meal.voted = @"like";
